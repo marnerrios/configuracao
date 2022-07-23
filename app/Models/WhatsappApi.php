@@ -11,6 +11,16 @@ class WhatsappApi extends Model
         'phone',
         'chatName',
         'tipoMensagem',
-        'respondido'
+        'campanha',
+        'respondido',
+        'cpf',
+        'dados_conta',
+        'salario',
+        'email',
+        'link_documento',
+        'link_documento',
+        'link_endereco',
+        'link_selfie',
+        'link_dados_conta'
     ]; 
 }

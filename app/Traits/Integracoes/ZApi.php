@@ -5,8 +5,15 @@ namespace App\Traits\Integracoes;
 
 trait ZApi 
 {
-    private $mainUrl = 'https://api.z-api.io/instances/3AA17AFBF8D9D0CBE6822E7156C53355/token/CAB540BC618E9F02887CA39B/';
-
+    private $mainUrl;
+    public function setMainUrl($key)
+    {
+        $urls = [
+            'BMG'=>'https://api.z-api.io/instances/3AA17AFBF8D9D0CBE6822E7156C53355/token/CAB540BC618E9F02887CA39B/',
+            'PAN'=>''
+        ];
+        $this->mainUrl = $urls[$key];
+    }
     public function sendButtonList($phone,$message,$buttons)
     {
         $header = [
@@ -34,6 +41,19 @@ trait ZApi
             'message'=>$message
         ]);
         return $this->curlRequest($header,'POST',$data_string,'send-text');
+    }
+    public function sendImage($phone,$image,$message)
+    {
+        $header = [
+            'Accept: application/json',
+            'Content-type: application/json',
+        ];
+        $data_string = json_encode([
+            'phone'=>$phone,
+            'image'=>$image,
+            'caption'=>$message
+        ]);
+        return $this->curlRequest($header,'POST',$data_string,'send-image');
     }
     private function curlRequest($header,$method='GET',$postFields=null,$urlRoute='')
     {

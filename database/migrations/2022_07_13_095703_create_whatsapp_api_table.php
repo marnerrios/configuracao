@@ -18,7 +18,16 @@ class CreateWhatsappApiTable extends Migration
             $table->string('phone', 20)->unique();
             $table->string('chatName', 50)->index();
             $table->string('tipoMensagem', 50)->index();
+            $table->string('campanha', 50)->index();
             $table->tinyInteger('respondido')->default(0)->index();
+            $table->string('cpf', 15)->nullable()->index();
+            $table->string('dados_conta', 100)->nullable();
+            $table->decimal('salario', $precision = 8, $scale = 2)->nullable();
+            $table->string('email', 100)->nullable();
+            $table->string('link_documento', 100)->nullable();
+            $table->string('link_endereco', 100)->nullable();
+            $table->string('link_selfie', 100)->nullable();
+            $table->string('link_dados_conta', 100)->nullable();
             $table->timestamps();
         });
     }
