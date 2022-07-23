@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class WhatsappApi extends Model
 {
+    protected $connection = 'mysql_local';
     protected $table = 'whatsapp_api';
     protected $fillable = [
         'phone',
