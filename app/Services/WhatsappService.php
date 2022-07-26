@@ -82,20 +82,20 @@ class WhatsappService
                         ];
                     } elseif ($proximaMensagem == 'email'){ //mensagem atual = dadosBancarios
                         $mensagem=$this->mensagens($proximaMensagem); 
-                        if ($mensagemWh['tipoMensagem'] == 'dadosBancarios') $dadosAdicionais = ['dadosConta'=>$mensagemWh['message']];
-                        if ($mensagemWh['tipoMensagem'] == 'image') $dadosAdicionais = ['link_dados_conta'=>$mensagemWh['message']];
+                        if ($mensagemWh['tipoMensagem'] == 'dadosBancarios') $dadosAdicionais = ['dados_conta'=>$mensagemWh['message']];
+                        if ($mensagemWh['tipoMensagem'] == 'imagem') $dadosAdicionais = ['link_dados_conta'=>$mensagemWh['message']];
 
                     } elseif ($proximaMensagem == 'imagemResidencia'){ //mensagem atual = imagemDoc
                         $mensagem=$this->mensagens($proximaMensagem); 
-                        if ($mensagemWh['tipoMensagem'] == 'image') $dadosAdicionais = ['link_documento'=>$mensagemWh['message']];
+                        if ($mensagemWh['tipoMensagem'] == 'imagem') $dadosAdicionais = ['link_documento'=>$mensagemWh['message']];
 
                     } elseif ($proximaMensagem == 'dadosBancarios'){ //mensagem atual = imagemResidencia
                         $mensagem=$this->mensagens($proximaMensagem); 
-                        if ($mensagemWh['tipoMensagem'] == 'image') $dadosAdicionais = ['link_endereco'=>$mensagemWh['message']];
+                        if ($mensagemWh['tipoMensagem'] == 'imagem') $dadosAdicionais = ['link_endereco'=>$mensagemWh['message']];
 
                     } elseif ($proximaMensagem == 'finalizar'){ //mensagem atual = selfie
                         $mensagem=$this->mensagens($proximaMensagem); 
-                        if ($mensagemWh['tipoMensagem'] == 'image') $dadosAdicionais = ['link_selfie'=>$mensagemWh['message']];
+                        if ($mensagemWh['tipoMensagem'] == 'imagem') $dadosAdicionais = ['link_selfie'=>$mensagemWh['message']];
                     } else {
                         $mensagem=$this->mensagens($proximaMensagem); 
                     }
