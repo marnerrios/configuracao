@@ -113,7 +113,7 @@ class WhatsappService
         
         if ($mensagem['tipoMensagem'] == 'cpf' && ($mensagemAnterior == 'cpf' || $mensagemAnterior == 'cpfOk' || $mensagemAnterior == 'cpfIncorreto')) return 'cpfOk';
         if ($mensagem['tipoMensagem'] == 'cpfIncorreto' && $mensagemAnterior == 'cpf') return 'cpfIncorreto';
-        if ($mensagem['tipoMensagem'] == 'email' && $mensagemAnterior == 'email') return 'selfie';
+        if ($mensagem['tipoMensagem'] == 'email' && ($mensagemAnterior == 'email' || $mensagemAnterior == 'emailIncorreto')) return 'selfie';
         if ($mensagem['tipoMensagem'] == 'dadosBancarios' && $mensagemAnterior == 'dadosBancarios') return 'email';
         if ($mensagem['tipoMensagem'] == 'respostaGenerica'){
             if ($mensagemAnterior == 'cpf') return 'cpfIncorreto';
