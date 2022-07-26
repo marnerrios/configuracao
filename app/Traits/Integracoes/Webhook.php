@@ -84,7 +84,7 @@ trait Webhook {
             return [
                 'chatName'=>$dados['chatName'],
                 'phone'=>$dados['phone'],
-                'tipoMensagem'=>'dadosbancarios',
+                'tipoMensagem'=>'dadosBancarios',
                 'message'=>''
             ];
         }
@@ -116,12 +116,12 @@ trait Webhook {
             'semInteresse'=>"Que pena 😢, qualquer coisa estou por aqui, caso mude de ideia é só digitar #. Até logo!",
             'cpf'=>"Poderia me informar o seu CPF para continuarmos o atendimento? Exemplo: 02345378900",
             'cpfIncorreto'=>"Ops. CPF incorreto.\nFavor, informar o seu CPF para continuarmos o atendimento. Exemplo: 02345378900",
-            'cpfNaoEncontrado'=>'Houve um problema ao executar a solicitação.',
+            'cpfNaoEncontrado'=>'Desculpe! No momento não estamos conseguindo localizar seu CPF no cadastro do banco.',
             'cpfOk'=>"Cartão benefício INSS pré-aprovado no limite de R$ ".@$infos['limiteCartao']." sendo *70% (R$ ".@$infos['70porcento'].")* disponível para saque em 84 meses e *30% (R$ ".@$infos['30porcento'].")* disponível para compras.\n\n" 
                     . "Deseja prosseguir com a contratação e saque dos 70% do limite?",
             'imagemDoc'=>"OK! Agora precisaremos de alguns dados para seguir com a sua solicitação. Por favor, me envie uma foto de um documento de identidade, por exemplo, o RG ou a CNH, lembrando que o documento não pode estar no plástico, tem que ser bem nítido, alinhados, sem cortes e flash.",
             'imagemResidencia'=>"Agora vou precisar que me envie uma foto do comprovante de residência somente da parte que conste o endereço ou escreva o endereço completo com o CEP. Não é necessário que esteja em nome do beneficiário.",
-            'dadosBancarios'=>"Por favor me informe os dados bancários em nome do titular do benefício para depósito do valor, a mesma em que recebe o benefício.",
+            'dadosBancarios'=>"Por favor me informe os dados bancários em nome do titular do benefício para depósito do valor, a mesma em que recebe o benefício. Banco/Agência/Conta",
             'email'=>"Para finalizar informe um e-mail para recebimento da fatura.",
             'finalizar'=>"Perfeito! Sua proposta foi encaminhada para digitação, em breve você recebera um SMS com o link para assinatura do contrato é importante ficar atento no recebimento desse link, pois o contrato só é liberado para averbação após a assinatura.",
             'emailIncorreto'=>"Informe um e-mail válido para recebimento da fatura",

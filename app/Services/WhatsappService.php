@@ -59,11 +59,18 @@ class WhatsappService
                         if ($dadosInss == false) $mensagem=$this->mensagens('cpfNaoEncontrado');
                         else {
                             $mensagem=$this->mensagens('cpfOk',['limiteCartao'=>$dadosInss['limiteCartao'],'70porcento'=>$dadosInss['70porcento'],'30porcento'=>$dadosInss['30porcento']]);
+                            //gravar na tabel cpf e salario
                             $dadosAdicionais = [
                                 'cpf'=>$mensagemWh['message'],
                                 'salario'=>$dadosInss['salario']
                             ];
                         }
+
+                    } elseif ($proximaMensagem == 'selfie'){
+                        $mensagem=$this->mensagens($proximaMensagem); 
+                        $dadosAdicionais = [
+                            'email'=>$mensagemWh['message'],
+                        ];
 
                     } else {
                         $mensagem=$this->mensagens($proximaMensagem); 
@@ -97,12 +104,14 @@ class WhatsappService
             if($mensagemAnterior == 'imagemDoc') return 'imagemResidencia';
             if($mensagemAnterior == 'imagemResidencia') return 'dadosBancarios';
             if($mensagemAnterior == 'dadosBancarios') return 'email';
-            //if($mensagemAnterior == 'email') return 'selfie';
+            if($mensagemAnterior == 'email') return 'selfie';
+            if($mensagemAnterior == 'selfie') return 'finalizar';
         }
         
         if ($mensagem['tipoMensagem'] == 'cpf' && ($mensagemAnterior == 'cpf' || $mensagemAnterior == 'cpfOk' || $mensagemAnterior == 'cpfIncorreto')) return 'cpfOk';
         if ($mensagem['tipoMensagem'] == 'cpfIncorreto' && $mensagemAnterior == 'cpf') return 'cpfIncorreto';
         if ($mensagem['tipoMensagem'] == 'email' && $mensagemAnterior == 'email') return 'selfie';
+        if ($mensagem['tipoMensagem'] == 'dadosBancarios' && $mensagemAnterior == 'imagemResidencia') return 'email';
         if ($mensagem['tipoMensagem'] == 'respostaGenerica'){
             if ($mensagemAnterior == 'cpf') return 'cpfIncorreto';
             if ($mensagemAnterior == 'finalizar') return 'respostaGenerica';
