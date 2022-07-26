@@ -24,7 +24,11 @@ class WhatsappService
         //if ($resposta['proximaMensagem'] == 'respostaGenerica') return false;
         if($resposta['proximaMensagem'] == 'saudacao'){
             $this->sendImage($dadosWebhook['phone'],$this->imagem('BMG'),$resposta['mensagem']['msg']);
-            $this->sendButtonList($dadosWebhook['phone'],$this->mensagens('saudacaoBotao')['msg'],$resposta['mensagem']['botao']);
+            $this->sendButtonList(
+                $dadosWebhook['phone'],
+                $this->mensagens('saudacaoBotao')['msg'],
+                $resposta['mensagem']['botao']
+            );
         } elseif($resposta['proximaMensagem'] == 'selfie'){
             $this->sendImage($dadosWebhook['phone'],$this->imagem('selfie'),$resposta['mensagem']['msg']);
         } elseif ($resposta['proximaMensagem'] == 'cpfOk'){
@@ -32,6 +36,8 @@ class WhatsappService
         } else {
             $this->sendText($dadosWebhook['phone'],$resposta['mensagem']['msg']);
         }
+
+        //Dados adicionais
         foreach ($resposta['dadosAdicionais'] as $chave=>$valor){
             $dadosGravar[$chave] = $valor;
         }

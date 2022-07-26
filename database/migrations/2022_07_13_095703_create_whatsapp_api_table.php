@@ -22,12 +22,12 @@ class CreateWhatsappApiTable extends Migration
             $table->tinyInteger('respondido')->default(0)->index();
             $table->string('cpf', 15)->nullable()->index();
             $table->string('dados_conta', 100)->nullable();
-            $table->decimal('salario', $precision = 8, $scale = 2)->nullable();
+            $table->decimal('valor_limite', $precision = 8, $scale = 2)->nullable();
             $table->string('email', 100)->nullable();
-            $table->string('link_documento', 100)->nullable();
-            $table->string('link_endereco', 100)->nullable();
-            $table->string('link_selfie', 100)->nullable();
-            $table->string('link_dados_conta', 100)->nullable();
+            $table->string('link_documento', 200)->nullable();
+            $table->string('link_endereco', 200)->nullable();
+            $table->string('link_selfie', 200)->nullable();
+            $table->string('link_dados_conta', 200)->nullable();
             $table->timestamps();
         });
     }
