@@ -71,16 +71,31 @@ class WhatsappService
                             //gravar na tabel cpf e salario
                             $dadosAdicionais = [
                                 'cpf'=>$mensagemWh['message'],
-                                'salario'=>$dadosInss['salario']
+                                'valor_limite'=>$dadosInss['limite']
                             ];
                         }
 
-                    } elseif ($proximaMensagem == 'selfie'){
+                    } elseif ($proximaMensagem == 'selfie'){ //mensagem atual = email
                         $mensagem=$this->mensagens($proximaMensagem); 
                         $dadosAdicionais = [
                             'email'=>$mensagemWh['message'],
                         ];
+                    } elseif ($proximaMensagem == 'email'){ //mensagem atual = dadosBancarios
+                        $mensagem=$this->mensagens($proximaMensagem); 
+                        if ($mensagemWh['tipoMensagem'] == 'dadosBancarios') $dadosAdicionais = ['dadosConta'=>$mensagemWh['message']];
+                        if ($mensagemWh['tipoMensagem'] == 'image') $dadosAdicionais = ['link_dados_conta'=>$mensagemWh['message']];
 
+                    } elseif ($proximaMensagem == 'imagemResidencia'){ //mensagem atual = imagemDoc
+                        $mensagem=$this->mensagens($proximaMensagem); 
+                        if ($mensagemWh['tipoMensagem'] == 'image') $dadosAdicionais = ['link_documento'=>$mensagemWh['message']];
+
+                    } elseif ($proximaMensagem == 'dadosBancarios'){ //mensagem atual = imagemResidencia
+                        $mensagem=$this->mensagens($proximaMensagem); 
+                        if ($mensagemWh['tipoMensagem'] == 'image') $dadosAdicionais = ['link_endereco'=>$mensagemWh['message']];
+
+                    } elseif ($proximaMensagem == 'finalizar'){ //mensagem atual = selfie
+                        $mensagem=$this->mensagens($proximaMensagem); 
+                        if ($mensagemWh['tipoMensagem'] == 'image') $dadosAdicionais = ['link_selfie'=>$mensagemWh['message']];
                     } else {
                         $mensagem=$this->mensagens($proximaMensagem); 
                     }

@@ -23,7 +23,7 @@ class InssService
         'limiteCartao'=>number_format($salarioBase * 1.375,2,',','.'), //MR * 5% * 27,5
         '70porcento'=>number_format($salarioBase * 0.9625,2,',','.'), //limite * 70%
         '30porcento'=>number_format($salarioBase * 0.4125,2,',','.'), //limite * 30%
-        'salario'=>$salarioBase //não formatado
+        'limite'=>$salarioBase * 1.375 //não formatado
        ];
     }
     public function calcSalarioBase($cpf)
