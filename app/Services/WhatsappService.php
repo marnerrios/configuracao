@@ -21,7 +21,7 @@ class WhatsappService
             return false;
         }
         $dadosGravar = ['chatName'=>$dadosWebhook['chatName'],'tipoMensagem'=>$resposta['proximaMensagem'],'respondido'=>1];
-        if ($resposta['proximaMensagem'] == 'respostaGenerica') return false;
+        //if ($resposta['proximaMensagem'] == 'respostaGenerica') return false;
         if($resposta['proximaMensagem'] == 'saudacao'){
             $this->sendImage($dadosWebhook['phone'],$this->imagem('BMG'),$resposta['mensagem']['msg']);
             $this->sendButtonList($dadosWebhook['phone'],$this->mensagens('saudacaoBotao')['msg'],$resposta['mensagem']['botao']);
@@ -35,7 +35,6 @@ class WhatsappService
         foreach ($resposta['dadosAdicionais'] as $chave=>$valor){
             $dadosGravar[$chave] = $valor;
         }
-        print_r($dadosGravar);
         return WhatsappApi::updateOrCreate(
             ['phone'=>$dadosWebhook['phone'],'campanha'=>'BMG'],
             $dadosGravar
@@ -58,7 +57,11 @@ class WhatsappService
                         $dadosInss = (new InssService)->calcMargemCartaoBeneficio($mensagemWh['message']);
                         if ($dadosInss == false) $mensagem=$this->mensagens('cpfNaoEncontrado');
                         else {
-                            $mensagem=$this->mensagens('cpfOk',['limiteCartao'=>$dadosInss['limiteCartao'],'70porcento'=>$dadosInss['70porcento'],'30porcento'=>$dadosInss['30porcento']]);
+                            $mensagem=$this->mensagens('cpfOk',[
+                                'limiteCartao'=>$dadosInss['limiteCartao'],
+                                '70porcento'=>$dadosInss['70porcento'],
+                                '30porcento'=>$dadosInss['30porcento']
+                            ]);
                             //gravar na tabel cpf e salario
                             $dadosAdicionais = [
                                 'cpf'=>$mensagemWh['message'],
@@ -111,12 +114,13 @@ class WhatsappService
         if ($mensagem['tipoMensagem'] == 'cpf' && ($mensagemAnterior == 'cpf' || $mensagemAnterior == 'cpfOk' || $mensagemAnterior == 'cpfIncorreto')) return 'cpfOk';
         if ($mensagem['tipoMensagem'] == 'cpfIncorreto' && $mensagemAnterior == 'cpf') return 'cpfIncorreto';
         if ($mensagem['tipoMensagem'] == 'email' && $mensagemAnterior == 'email') return 'selfie';
-        if ($mensagem['tipoMensagem'] == 'dadosBancarios' && $mensagemAnterior == 'imagemResidencia') return 'email';
+        if ($mensagem['tipoMensagem'] == 'dadosBancarios' && $mensagemAnterior == 'dadosBancarios') return 'email';
         if ($mensagem['tipoMensagem'] == 'respostaGenerica'){
             if ($mensagemAnterior == 'cpf') return 'cpfIncorreto';
+            if ($mensagemAnterior == 'email') return 'emailIncorreto';
             if ($mensagemAnterior == 'finalizar') return 'respostaGenerica';
-            return 'respostaGenerica';
+            return 'inicioGenerico';
         }
-        return 'respostaGenerica';
+        return 'inicioGenerico';
     }
 }

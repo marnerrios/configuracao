@@ -85,7 +85,7 @@ trait Webhook {
                 'chatName'=>$dados['chatName'],
                 'phone'=>$dados['phone'],
                 'tipoMensagem'=>'dadosBancarios',
-                'message'=>''
+                'message'=>$text
             ];
         }
         return [
@@ -107,6 +107,7 @@ trait Webhook {
     private function mensagens($key,$infos=[])
     {
         $msg = [
+            'inicioGenerico'=>'Olá! Caso deseje iniciar uma solicitação digite: #',
             'saudacao'=>"Olá, ".@$infos['chatName']."! Seja bem-vindo (a) ao canal digital para contratação do cartão de crédito consignado benefício INSS do *Banco ".@$infos['banco']."*. Ficamos felizes em poder te atender.\n\n"
                     . "*O que é o cartão de crédito benefício INSS?*\n\n"
                     . "É um cartão de crédito com benefícios atrelados, em que os gastos são discriminados numa fatura que tem um valor mínimo a ser pago. Este valor mínimo será descontado em folha de pagamento a partir de uma margem reservada consignada de beneficio – *RMC*.\n\n"
