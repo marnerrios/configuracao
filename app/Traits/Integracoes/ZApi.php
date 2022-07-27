@@ -38,7 +38,8 @@ trait ZApi
         ];
         $data_string = json_encode([
             'phone'=>$phone,
-            'message'=>$message
+            'message'=>$message,
+            'delayTyping'=>10
         ]);
         return $this->curlRequest($header,'POST',$data_string,'send-text');
     }
@@ -51,7 +52,8 @@ trait ZApi
         $data_string = json_encode([
             'phone'=>$phone,
             'image'=>$image,
-            'caption'=>$message
+            'caption'=>$message,
+            'delayTyping'=>10
         ]);
         return $this->curlRequest($header,'POST',$data_string,'send-image');
     }
