@@ -55,6 +55,14 @@ trait Webhook {
         $text = trim($dados['text']['message']);
         $onlyNumbers = preg_replace("/[^0-9]/", "",$text);
 
+        if (preg_match("/banco|conta/i",$text) || preg_match("/([0-9\-\s]+)\/([0-9\-\s]+)\/([0-9a-b\-\s])/i",$text)){
+            return [
+                'chatName'=>$dados['chatName'],
+                'phone'=>$dados['phone'],
+                'tipoMensagem'=>'dadosBancarios',
+                'message'=>$text
+            ];
+        }
         if (preg_match("/^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}/",$onlyNumbers)){
             $tipoMensagem = 'cpf';
             if (!$this->validaCPF($onlyNumbers)) $tipoMensagem = 'cpfIncorreto';
@@ -79,22 +87,6 @@ trait Webhook {
                 'phone'=>$dados['phone'],
                 'tipoMensagem'=>'primeira',
                 'message'=>''
-            ];
-        }
-        if (preg_match("/banco|conta/i",$text)){
-            return [
-                'chatName'=>$dados['chatName'],
-                'phone'=>$dados['phone'],
-                'tipoMensagem'=>'dadosBancarios',
-                'message'=>$text
-            ];
-        }
-        if (preg_match("/([0-9\-\s]+)\/([0-9\-\s]+)\/([0-9a-b\-\s])/i",$text)){
-            return [
-                'chatName'=>$dados['chatName'],
-                'phone'=>$dados['phone'],
-                'tipoMensagem'=>'dadosBancarios',
-                'message'=>$text
             ];
         }
         return [

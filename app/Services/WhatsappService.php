@@ -138,6 +138,7 @@ class WhatsappService
         if ($mensagem['tipoMensagem'] == 'dadosBancarios' && $mensagemAnterior == 'dadosBancarios') return 'email';
         if ($mensagem['tipoMensagem'] == 'respostaGenerica'){
             if ($mensagemAnterior == 'cpf') return 'cpfIncorreto';
+            if ($mensagemAnterior == 'dadosBancarios') return 'dadosBancarios';
             if ($mensagemAnterior == 'email') return 'emailIncorreto';
             if ($mensagemAnterior == 'finalizar') return 'respostaGenerica';
             return 'inicioGenerico';
