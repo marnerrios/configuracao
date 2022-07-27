@@ -112,14 +112,14 @@ trait Webhook {
             'saudacao'=>"Olá, ".@$infos['chatName']."! Seja bem-vindo (a) ao canal digital para contratação do cartão de crédito consignado benefício INSS do *Banco ".@$infos['banco']."*. Ficamos felizes em poder te atender.\n\n"
                     . "*O que é o cartão de crédito benefício INSS?*\n\n"
                     . "É um cartão de crédito com benefícios atrelados, em que os gastos são discriminados numa fatura que tem um valor mínimo a ser pago. Este valor mínimo será descontado em folha de pagamento a partir de uma margem reservada consignada de beneficio – *RMC*.\n\n"
-                    . "*Confira as vantagens do cartão benefício do banco ".@$infos['banco']."*\n\n"
+                    . "*Confira as vantagens do Cartão Benefício do Banco ".@$infos['banco']."*\n\n"
                     . "+5% de margem *EXCLUSIVA*, saque de até 70% do limite, descontos em farmácias, seguro de vida grátis, assistência residencial com direito a chaveiro, eletricista e encanador, assistência remédio genérico grátis de até R$ 300,00 por mês em caso de atendimento de urgência e emergência e assistência funeral para até 5 familiares.\n\n",
             'saudacaoBotao'=>"Antes de iniciarmos me diga qual opção você deseja:",
             'semInteresse'=>"Que pena 😢, qualquer coisa estou por aqui, caso mude de ideia é só digitar #. Até logo!",
-            'cpf'=>"Para prosseguimos com a sua solicitação por aqui, preciso acessar o seu cadastro. Não se preocupe, estamos em um ambiente seguro! 🔒\n\n Infome, por favor, o seu CPF para continuarmos o atendimento. Exemplo: 02345378900",
+            'cpf'=>"Para prosseguimos com a sua solicitação por aqui, preciso acessar o seu cadastro. Não se preocupe, estamos em um ambiente seguro! 🔒\n\n Informe, por favor, o seu CPF para continuarmos o atendimento. Exemplo: 02345378900",
             'cpfIncorreto'=>"Ops. CPF incorreto.\nFavor, informar o seu CPF para continuarmos o atendimento. Exemplo: 02345378900",
             'cpfNaoEncontrado'=>'Desculpe! No momento não estamos conseguindo localizar seu CPF no cadastro do banco.',
-            'cpfOk'=>"Cartão benefício INSS pré-aprovado no limite de R$ ".@$infos['limiteCartao']." sendo *70% (R$ ".@$infos['70porcento'].")* disponível para saque em 84 meses e *30% (R$ ".@$infos['30porcento'].")* disponível para compras.\n\n" 
+            'cpfOk'=>"Cartão Benefício INSS pré-aprovado no limite de R$ ".@$infos['limiteCartao']." sendo *70% (R$ ".@$infos['70porcento'].")* disponível para saque em 84 meses e *30% (R$ ".@$infos['30porcento'].")* disponível para compras.\n\n" 
                     . "Deseja prosseguir com a contratação e saque dos 70% do limite?",
             'imagemDoc'=>"OK! Agora precisaremos de alguns dados para seguir com a sua solicitação.\n\nPor favor, me envie uma foto de um documento de identidade, por exemplo, o RG ou a CNH, lembrando que o documento não pode estar no plástico, tem que ser bem nítido, alinhados, sem cortes e flash.",
             'imagemResidencia'=>"Agora vou precisar que me envie uma foto do comprovante de residência somente da parte que conste o endereço. Não é necessário que esteja em nome do beneficiário.",
