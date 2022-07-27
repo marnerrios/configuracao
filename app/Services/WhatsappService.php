@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\WhatsappApi;
 use App\Traits\Integracoes\ZApi;
-use App\Traits\MyHelpers;
 use App\Traits\Integracoes\Webhook;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 

@@ -59,6 +59,10 @@ trait ZApi
     }
     private function curlRequest($header,$method='GET',$postFields=null,$urlRoute='')
     {
+        $f = fopen("./log.txt",'a+');
+        fwrite($f,date("dd/mm/yyyy H:i:s")."\n");
+        fclose($f);
+        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->mainUrl.$urlRoute);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
