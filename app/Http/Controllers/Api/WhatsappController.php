@@ -15,11 +15,11 @@ class WhatsappController extends Controller
     }
     public function recebeMensagemBmg(Request $request)
     {
-        $this->service->fazBmg($request->all());
+        $this->service->faz($request->all());
     }
     public function recebeMensagemPan(Request $request)
     {
-        //$this->service->getPan($request->all());
+        $this->service->faz($request->all(),'PAN');
     }
     public function enviaMensagem(Request $request)
     {

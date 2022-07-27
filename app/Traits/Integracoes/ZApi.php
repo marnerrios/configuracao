@@ -9,8 +9,8 @@ trait ZApi
     public function setMainUrl($key)
     {
         $urls = [
-            'BMG'=>'https://api.z-api.io/instances/3AA17AFBF8D9D0CBE6822E7156C53355/token/CAB540BC618E9F02887CA39B/',
-            'PAN'=>''
+            'BMG'=>'',
+            'PAN'=>'https://api.z-api.io/instances/3AA17AFBF8D9D0CBE6822E7156C53355/token/CAB540BC618E9F02887CA39B/'
         ];
         $this->mainUrl = $urls[$key];
     }

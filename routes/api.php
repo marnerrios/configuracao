@@ -18,8 +18,6 @@ use App\Http\Controllers\Api\WhatsappController;
 Route::group([
     'prefix' => 'auth'
 ], function () {
-    Route::post('/mensagemBMG/YKYHr50U5x0XJbHT',       [WhatsappController::class, 'recebeMensagemBmg']);
-    Route::post('/mensagemPAN/ACsgjMbqjpdGSE6e',       [WhatsappController::class, 'recebeMensagemPan']);
     Route::post('/login',       [AuthController::class, 'login']);
     Route::post('/refresh',     [AuthController::class, 'refresh']);
 });

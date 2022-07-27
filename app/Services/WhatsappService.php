@@ -12,10 +12,10 @@ class WhatsappService
 {
     use DispatchesJobs, ZApi, Webhook;
 
-    public function fazBmg($dadosWebhook)
+    public function faz($dadosWebhook,$banco='BMG')
     {
-        $this->setMainUrl('BMG');
-        $resposta = $this->respostaEnviar($dadosWebhook,'BMG');
+        $this->setMainUrl($banco);
+        $resposta = $this->respostaEnviar($dadosWebhook,$banco);
         if (!$resposta){
             $this->sendText($dadosWebhook['phone'],'Olá! Caso deseje iniciar uma solicitação digite: #');
             return false;
@@ -23,7 +23,7 @@ class WhatsappService
         $dadosGravar = ['chatName'=>$dadosWebhook['chatName'],'tipoMensagem'=>$resposta['proximaMensagem'],'respondido'=>1];
         //if ($resposta['proximaMensagem'] == 'respostaGenerica') return false;
         if($resposta['proximaMensagem'] == 'saudacao'){
-            $this->sendImage($dadosWebhook['phone'],$this->imagem('BMG'),$resposta['mensagem']['msg']);
+            $this->sendImage($dadosWebhook['phone'],$this->imagem($banco),$resposta['mensagem']['msg']);
             $this->sendButtonList(
                 $dadosWebhook['phone'],
                 $this->mensagens('saudacaoBotao')['msg'],
@@ -42,7 +42,7 @@ class WhatsappService
             $dadosGravar[$chave] = $valor;
         }
         return WhatsappApi::updateOrCreate(
-            ['phone'=>$dadosWebhook['phone'],'campanha'=>'BMG'],
+            ['phone'=>$dadosWebhook['phone'],'campanha'=>$banco],
             $dadosGravar
         );
     }
