@@ -89,6 +89,14 @@ trait Webhook {
                 'message'=>$text
             ];
         }
+        if (preg_match("/([0-9\-\s]+)\/([0-9\-\s]+)\/([0-9a-b\-\s])/i",$text)){
+            return [
+                'chatName'=>$dados['chatName'],
+                'phone'=>$dados['phone'],
+                'tipoMensagem'=>'dadosBancarios',
+                'message'=>$text
+            ];
+        }
         return [
             'chatName'=>$dados['chatName'],
             'phone'=>$dados['phone'],
