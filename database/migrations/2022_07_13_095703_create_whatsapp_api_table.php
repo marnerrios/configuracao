@@ -15,7 +15,7 @@ class CreateWhatsappApiTable extends Migration
     {
         Schema::connection('mysql_local')->create('whatsapp_api', function (Blueprint $table) {
             $table->id();
-            $table->string('phone', 20)->unique();
+            $table->string('phone', 20)->index();
             $table->string('chatName', 50)->index();
             $table->string('tipoMensagem', 50)->index();
             $table->string('campanha', 50)->index();
@@ -29,6 +29,7 @@ class CreateWhatsappApiTable extends Migration
             $table->string('link_selfie', 200)->nullable();
             $table->string('link_dados_conta', 200)->nullable();
             $table->timestamps();
+            $table->unique(['phone','campanha']);
         });
     }
 
