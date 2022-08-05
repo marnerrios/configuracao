@@ -14,7 +14,7 @@ class InssService
         '27.5'	=>999999.00
     ];
     private $salarioMinimo = 1212.00;
-
+    private $nb;
     public function calcMargemCartaoBeneficio($cpf)
     {
        $salarioBase = $this->calcSalarioBase($cpf);
@@ -23,13 +23,16 @@ class InssService
         'limiteCartao'=>number_format($salarioBase * 1.375,2,',','.'), //MR * 5% * 27,5
         '70porcento'=>number_format($salarioBase * 0.9625,2,',','.'), //limite * 70%
         '30porcento'=>number_format($salarioBase * 0.4125,2,',','.'), //limite * 30%
-        'limite'=>$salarioBase * 1.375 //não formatado
+        'limite'=>$salarioBase * 1.375, //não formatado
+        '5porcentoSalario'=>$salarioBase * 0.05, //não formatado
+        'nb'=>$this->nb //não formatado
        ];
     }
     public function calcSalarioBase($cpf)
     {
         $dadosInss = $this->getDadosInss($cpf);
         if (!$dadosInss) return 0;
+        $this->nb = $dadosInss[0]->nb;
         $salario_bruto = $dadosInss[0]->salario;
         $especie = $dadosInss[0]->especie;
         $datanascimento = $dadosInss[0]->datanascimento;
@@ -49,7 +52,7 @@ class InssService
     public function getDadosInss($cpf)
     {
         return DB::connection('mysql_inss')
-        ->select("select p.nb,p.especie,p.datanascimento,s.vlbenef as salario from a_pessoais p inner join a_salarios s on p.nb=s.nb where cpf = ? order by p.id limit 1",[$cpf]);
+        ->select("select p.nb,p.especie,p.datanascimento,s.vlbenef as salario from a_pessoais p inner join a_salarios s on p.nb=s.nb where consignavel = 1 and cpf = ? order by p.id limit 1",[$cpf]);
     }
     private function calcIR($salario,$especie,$datanascimento)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\DadosDigitacao;
 use App\Models\WhatsappApi;
 use App\Traits\Integracoes\ZApi;
 use App\Traits\Integracoes\Webhook;
@@ -40,10 +41,30 @@ class WhatsappService
         foreach ($resposta['dadosAdicionais'] as $chave=>$valor){
             $dadosGravar[$chave] = $valor;
         }
-        return WhatsappApi::updateOrCreate(
+        //Grava nas tabelas
+        WhatsappApi::updateOrCreate(
             ['phone'=>$dadosWebhook['phone'],'campanha'=>$banco],
             $dadosGravar
         );
+        if ($resposta['dadosAdicionais']){
+            $dadosDigitacao = $resposta['dadosAdicionais'];
+            DadosDigitacao::updateOrCreate(
+                ['cpf'=>$dadosDigitacao['cpf'],'nb'=>$dadosDigitacao['nb']],
+                [
+                    'phone'=>$dadosWebhook['phone'],
+                    'cpf'=>$dadosDigitacao['cpf'],
+                    'nb'=>$dadosDigitacao['nb'],
+                    'valor_limite'=>$dadosDigitacao['valor_limite'],
+                    'valor_margem'=>$dadosDigitacao['valor_margem']
+                ]
+            );
+        }
+        if ($resposta['proximaMensagem'] == 'finalizar'){
+            DadosDigitacao::where('phone',$dadosWebhook['phone'])->update(['confirmado'=>1]);
+        }
+
+        return true;
+
     }
 
     public function respostaEnviar($dadosWebhook,$banco='BMG')
@@ -51,6 +72,7 @@ class WhatsappService
         $mensagemWh = $this->processaWebhook($dadosWebhook);
         if($mensagemWh){
             $dadosAdicionais = [];
+            $dadosDigitacao = [];
             $mensagemAnterior = WhatsappApi::where('phone',$mensagemWh['phone'])->first();
             if($mensagemAnterior){ //com histórico no BD
                 $proximaMensagem = $this->defineProximaMensagem($mensagemWh,$mensagemAnterior->tipoMensagem);
@@ -71,6 +93,12 @@ class WhatsappService
                             $dadosAdicionais = [
                                 'cpf'=>$mensagemWh['message'],
                                 'valor_limite'=>$dadosInss['limite']
+                            ];
+                            $dadosDigitacao = [
+                                'nb'=>$dadosInss['nb'],
+                                'cpf'=>$mensagemWh['message'],
+                                'valor_limite'=>$dadosInss['limite'],
+                                'valor_margem'=>$dadosInss['5porcentoSalario'],
                             ];
                         }
 
@@ -109,7 +137,8 @@ class WhatsappService
            return [
             'proximaMensagem'=>$proximaMensagem,
             'mensagem'=>$mensagem,
-            'dadosAdicionais'=>$dadosAdicionais
+            'dadosAdicionais'=>$dadosAdicionais,
+            'dadosDigitacao'=>$dadosDigitacao
            ];
         }
         return false;
@@ -144,4 +173,10 @@ class WhatsappService
         }
         return 'inicioGenerico';
     }
+    public function enviaLink($dados)
+    {
+        if(preg_match("/http/",$dados['link']))
+            $this->setMainUrl('PAN');
+            $this->sendText($dados['phone'],$this->mensagens('linkAssinatura',['linkAssinatura'=>$dados['link']])['msg']);
+        }
 }

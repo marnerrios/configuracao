@@ -27,5 +27,6 @@ Route::group([
     Route::post('/mensagemBMG/YKYHr50U5x0XJbHT',       [WhatsappController::class, 'recebeMensagemBmg']);
     Route::post('/mensagemPAN/ACsgjMbqjpdGSE6e',       [WhatsappController::class, 'recebeMensagemPan']);
     Route::get('{cpf}',       [WhatsappController::class, 'calcSalarioBase']);
+    Route::post('linkAssinatura',       [WhatsappController::class, 'enviaLink']);
 });
 

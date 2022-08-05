@@ -21,6 +21,10 @@ class WhatsappController extends Controller
     {
         $this->service->faz($request->all(),'PAN');
     }
+    public function enviaLink(Request $request)
+    {
+        $this->service->enviaLink($request->all());
+    }
     public function enviaMensagem(Request $request)
     {
         //

@@ -128,7 +128,8 @@ trait Webhook {
             'finalizar'=>"Perfeito! Sua proposta foi encaminhada para digitação, em breve você recebera um SMS com o link para assinatura do contrato é importante ficar atento no recebimento desse link, pois o contrato só é liberado para averbação após a assinatura.",
             'emailIncorreto'=>"Informe um e-mail válido para recebimento da fatura",
             'respostaGenerica'=>"Em breve você terá um retorno desta solicitação. Caso queira recomeçar o procedimento de contratação, digite #",
-            'selfie'=>"Para finalizar, precisamos da sua selfie! Faça a foto com o seu documento ao lado do rosto para validarmos o seu cadastro.\n\nEsta foto não será divulgada."
+            'selfie'=>"Para finalizar, precisamos da sua selfie! Faça a foto com o seu documento ao lado do rosto para validarmos o seu cadastro.\n\nEsta foto não será divulgada.",
+            'linkAssinatura'=>"Estou enviando o link para assinatura do seu contrato: ".@$infos['linkAssinatura']."\n\nQualquer dúvida é só me chamar estou à disposição, é extremamente importante que assine o contrato para que não ocorra atrasos na liberação do seu empréstimo."
         ];
 
         $button = [
