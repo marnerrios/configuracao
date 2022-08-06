@@ -46,8 +46,8 @@ class WhatsappService
             ['phone'=>$dadosWebhook['phone'],'campanha'=>$banco],
             $dadosGravar
         );
-        if (array_key_exists('nb',$resposta['dadosAdicionais'])){
-            $dadosDigitacao = $resposta['dadosAdicionais'];
+        if ($resposta['dadosAdicionais']){
+            $dadosDigitacao = $resposta['dadosAdicionais'][0];
             DadosDigitacao::updateOrCreate(
                 ['cpf'=>$dadosDigitacao['cpf'],'nb'=>$dadosDigitacao['nb']],
                 [
