@@ -57,7 +57,7 @@ class WhatsappService
                 ]
             );
         }
-        if ($resposta['proximaMensagem'] == 'finalizar'){
+        if ($resposta['proximaMensagem'] == 'imagemDoc'){
             DadosDigitacao::where('phone',$dadosWebhook['phone'])->update(['confirmado'=>1]);
         }
 
