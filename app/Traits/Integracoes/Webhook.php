@@ -81,7 +81,7 @@ trait Webhook {
                 'message'=>$text
             ];
         }
-        if (preg_match("/(quero um[^^]+(BMG|PAN))|(#)/i",$text)){
+        if (preg_match("/(quero saber[^^]+(BMG|PAN))|(#)/i",$text)){
             return [
                 'chatName'=>$dados['chatName'],
                 'phone'=>$dados['phone'],
