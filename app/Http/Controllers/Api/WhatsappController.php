@@ -23,7 +23,7 @@ class WhatsappController extends Controller
     }
     public function enviaLink(Request $request)
     {
-        $this->service->enviaLink($request->all());
+        return $this->service->enviaLink($request->all());
     }
     public function enviaMensagem(Request $request)
     {

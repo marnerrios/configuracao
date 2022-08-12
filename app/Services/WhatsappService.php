@@ -175,8 +175,11 @@ class WhatsappService
     }
     public function enviaLink($dados)
     {
-        if(preg_match("/http/",$dados['link']))
+        if(preg_match("/http/",$dados['link'])){
             $this->setMainUrl('PAN');
             $this->sendText($dados['phone'],$this->mensagens('linkAssinatura',['linkAssinatura'=>$dados['link']])['msg']);
+            return ['message'=>'Link enviado'];
         }
+        return ['error'=>'Link inválido'];
+    }    
 }
