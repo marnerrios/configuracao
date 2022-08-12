@@ -55,7 +55,7 @@ trait Webhook {
         $text = trim($dados['text']['message']);
         $onlyNumbers = preg_replace("/[^0-9]/", "",$text);
 
-        if (preg_match("/banco|conta/i",$text) || preg_match("/([0-9\-\s]+)\/([0-9\-\s]+)\/([0-9a-b\-\s])/i",$text)){
+        if (preg_match("/conta/i",$text) || preg_match("/([0-9\-\s]+)\/([0-9\-\s]+)\/([0-9a-b\-\s])/i",$text)){
             return [
                 'chatName'=>$dados['chatName'],
                 'phone'=>$dados['phone'],
@@ -81,7 +81,7 @@ trait Webhook {
                 'message'=>$text
             ];
         }
-        if (preg_match("/(quero um[^^]+(BMG|PAN))|(#)/i",$text)){
+        if (preg_match("/(quero[^^]+(BMG|PAN))|(#)/i",$text)){
             return [
                 'chatName'=>$dados['chatName'],
                 'phone'=>$dados['phone'],

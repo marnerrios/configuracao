@@ -46,20 +46,18 @@ class WhatsappService
             ['phone'=>$dadosWebhook['phone'],'campanha'=>$banco],
             $dadosGravar
         );
-        if ($resposta['dadosAdicionais']){
-            $dadosDigitacao = $resposta['dadosAdicionais'];
+        if ($resposta['dadosDigitacao']){
+            $dadosDigitacao = $resposta['dadosDigitacao'];
             DadosDigitacao::updateOrCreate(
                 ['cpf'=>$dadosDigitacao['cpf'],'nb'=>$dadosDigitacao['nb']],
                 [
                     'phone'=>$dadosWebhook['phone'],
-                    'cpf'=>$dadosDigitacao['cpf'],
-                    'nb'=>$dadosDigitacao['nb'],
                     'valor_limite'=>$dadosDigitacao['valor_limite'],
                     'valor_margem'=>$dadosDigitacao['valor_margem']
                 ]
             );
         }
-        if ($resposta['proximaMensagem'] == 'finalizar'){
+        if ($resposta['proximaMensagem'] == 'imagemDoc'){
             DadosDigitacao::where('phone',$dadosWebhook['phone'])->update(['confirmado'=>1]);
         }
 
