@@ -127,10 +127,11 @@ class WhatsappService
                 }
 
             } else { // sem histórico no BD
-                if ($mensagemWh['tipoMensagem'] == 'primeira'){
+
+               // if ($mensagemWh['tipoMensagem'] == 'primeira'){
                     $proximaMensagem = 'saudacao';
                     $mensagem=$this->mensagens('saudacao',['chatName'=>$mensagemWh['chatName'],'banco'=>$banco]);
-                } else return false;
+               // } else return false;
            }
            return [
             'proximaMensagem'=>$proximaMensagem,
